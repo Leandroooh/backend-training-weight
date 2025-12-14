@@ -39,6 +39,7 @@ export async function getWorkoutById(app: FastifyInstance) {
 								id: true,
 								exercise: true,
 								createdAt: true,
+								updatedAt: true,
 							},
 						},
 					},

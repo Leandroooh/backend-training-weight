@@ -22,7 +22,6 @@ export async function createExerciseRoute(app: FastifyInstance) {
 				},
 			},
 			async (request, reply) => {
-				// workout Id
 				const { id } = request.params;
 				const { exercise } = request.body;
 				const userId = await request.getCurrentUserToken();

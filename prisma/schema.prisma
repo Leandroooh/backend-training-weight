@@ -44,7 +44,7 @@ model ExerciseEntry {
   id String @id @default(uuid())
 
   exercise String
-  series   ExercsieSerie[]
+  series   ExerciseSeries[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -55,12 +55,12 @@ model ExerciseEntry {
   @@map("exercise_entries")
 }
 
-model ExercsieSerie {
+model ExerciseSeries {
   id String @id @default(uuid())
 
-  serie       Int
-  reps        Int
-  serieWeight Float
+  series       Int
+  reps         Int
+  seriesWeight Float
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -68,6 +68,6 @@ model ExercsieSerie {
   exerciseEntry   ExerciseEntry @relation(fields: [exerciseEntryId], references: [id])
   exerciseEntryId String
 
-  @@unique([serie, exerciseEntryId])
+  @@unique([series, exerciseEntryId])
   @@map("exercise_series")
 }

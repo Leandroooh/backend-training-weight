@@ -13,6 +13,8 @@ import { Me } from "./routes/auth/me.js";
 import { RegisterUserRoute } from "./routes/auth/registerRoute.js";
 import { createExerciseRoute } from "./routes/exercise/createExerciseRoute.js";
 import { GetExercisesRoute } from "./routes/exercise/getExercisesRoute.js";
+import { CreateSeriesRoute } from "./routes/series/createSerieRoute.js";
+import { GetSeriesRoute } from "./routes/series/getSeriesRoute.js";
 import { createWorkoutRoute } from "./routes/workout/createWorkoutRoute.js";
 import { getWorkoutById } from "./routes/workout/getWorkoutById.js";
 import { getWorkoutsRoute } from "./routes/workout/getWorkoutsRoute.js";
@@ -60,6 +62,9 @@ app.register(createWorkoutRoute);
 app.register(getWorkoutsRoute);
 app.register(getWorkoutById);
 app.register(createExerciseRoute);
+
+app.register(GetSeriesRoute);
+app.register(CreateSeriesRoute);
 
 app.register(GetExercisesRoute);
 
