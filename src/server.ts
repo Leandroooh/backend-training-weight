@@ -9,6 +9,7 @@ import {
 	validatorCompiler,
 } from "fastify-type-provider-zod";
 import { LoginUserRoute } from "./routes/auth/loginRoute.js";
+import { Me } from "./routes/auth/me.js";
 import { RegisterUserRoute } from "./routes/auth/registerRoute.js";
 import { createExerciseRoute } from "./routes/exercise/createExerciseRoute.js";
 import { GetExercisesRoute } from "./routes/exercise/getExercisesRoute.js";
@@ -51,6 +52,7 @@ app.register(fastifyCors, {
 	methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
 });
 
+app.register(Me);
 app.register(LoginUserRoute);
 app.register(RegisterUserRoute);
 

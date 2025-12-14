@@ -15,8 +15,6 @@ export async function createExerciseRoute(app: FastifyInstance) {
 					tags: ["Exercise"],
 					body: z.object({
 						exercise: z.string(),
-						series: z.string(),
-						weight: z.string(),
 					}),
 					params: z.object({
 						id: z.string(),
@@ -26,7 +24,7 @@ export async function createExerciseRoute(app: FastifyInstance) {
 			async (request, reply) => {
 				// workout Id
 				const { id } = request.params;
-				const { exercise, series, weight } = request.body;
+				const { exercise } = request.body;
 				const userId = await request.getCurrentUserToken();
 
 				const workoutId = await prisma.workout.findFirst({
@@ -48,8 +46,6 @@ export async function createExerciseRoute(app: FastifyInstance) {
 				const exerciseEntry = await prisma.exerciseEntry.create({
 					data: {
 						exercise,
-						series,
-						weight,
 						workoutId: workoutId.id,
 					},
 				});

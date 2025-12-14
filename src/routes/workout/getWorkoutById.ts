@@ -38,8 +38,6 @@ export async function getWorkoutById(app: FastifyInstance) {
 							select: {
 								id: true,
 								exercise: true,
-								series: true,
-								weight: true,
 								createdAt: true,
 							},
 						},
