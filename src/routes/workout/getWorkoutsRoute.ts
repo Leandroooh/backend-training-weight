@@ -44,6 +44,7 @@ export async function getWorkoutsRoute(app: FastifyInstance) {
 						data: [],
 					});
 				}
+
 				if (page > totalPages) {
 					return reply.status(200).send({
 						pagination: {
@@ -61,6 +62,14 @@ export async function getWorkoutsRoute(app: FastifyInstance) {
 					skip: (page - 1) * pageSize,
 					take: pageSize,
 				});
+				const formattedWorkouts = workouts.map((workout) => ({
+					id: workout.id,
+					name: workout.name,
+					notes: workout.notes,
+					date: workout.date.toISOString().slice(0, 10), // YYYY-MM-DD
+					createdAt: workout.createdAt.toISOString(),
+					updatedAt: workout.updatedAt.toISOString(),
+				}));
 
 				return reply.status(200).send({
 					pagination: {
@@ -69,7 +78,7 @@ export async function getWorkoutsRoute(app: FastifyInstance) {
 						totalItems,
 						totalPages,
 					},
-					data: workouts,
+					data: formattedWorkouts,
 				});
 			},
 		);
