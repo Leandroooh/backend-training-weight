@@ -1,5 +1,4 @@
 export const parseFlexibleDate = (input: string): string | null => {
-	// 1️⃣ formato ISO estrito: YYYY-MM-DD
 	const isoMatch = /^(\d{4})-(\d{2})-(\d{2})$/.exec(input);
 	if (isoMatch) {
 		const [, yearStr, monthStr, dayStr] = isoMatch;
