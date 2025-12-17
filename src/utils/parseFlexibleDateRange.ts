@@ -3,7 +3,9 @@ type DateRange = {
 	end: Date;
 };
 
-export const parseFlexibleDateRange = (input: string): DateRange | null => {
+export const parseFlexibleDateRange = (
+	input: string,
+): DateRange | null => {
 	// 1️⃣ ISO estrito YYYY-MM-DD
 	const isoMatch = /^(\d{4})-(\d{2})-(\d{2})$/.exec(input);
 	let year: number, month: number, day: number;
@@ -41,7 +43,9 @@ export const parseFlexibleDateRange = (input: string): DateRange | null => {
 
 	// 3️⃣ fronteiras explícitas do dia (UTC)
 	const start = new Date(Date.UTC(year, month - 1, day, 0, 0, 0, 0));
-	const end = new Date(Date.UTC(year, month - 1, day, 23, 59, 59, 999));
+	const end = new Date(
+		Date.UTC(year, month - 1, day, 23, 59, 59, 999),
+	);
 
 	return { start, end };
 };
