@@ -16,7 +16,12 @@ export async function getWorkoutsRoute(app: FastifyInstance) {
 					tags: ["Workout"],
 					querystring: z.object({
 						page: z.coerce.number().int().min(1).default(1),
-						pageSize: z.coerce.number().int().min(1).max(100).default(6),
+						pageSize: z.coerce
+							.number()
+							.int()
+							.min(1)
+							.max(100)
+							.default(6),
 						from: z.string().optional(),
 						to: z.string().optional(),
 					}),
@@ -26,10 +31,12 @@ export async function getWorkoutsRoute(app: FastifyInstance) {
 				const { page, pageSize, from, to } = request.query;
 				const userId = await request.getCurrentUserToken();
 
-				let dateFilter: {
-					gte?: Date;
-					lte?: Date;
-				} | undefined;
+				let dateFilter:
+					| {
+							gte?: Date;
+							lte?: Date;
+					  }
+					| undefined;
 
 				if (from || to) {
 					dateFilter = {};
@@ -37,7 +44,9 @@ export async function getWorkoutsRoute(app: FastifyInstance) {
 					if (from) {
 						const range = parseFlexibleDateRange(from);
 						if (!range) {
-							return reply.status(400).send({ message: "Data inicial inválida" });
+							return reply
+								.status(400)
+								.send({ message: "Data inicial inválida" });
 						}
 						dateFilter.gte = range.start;
 					}
@@ -45,7 +54,9 @@ export async function getWorkoutsRoute(app: FastifyInstance) {
 					if (to) {
 						const range = parseFlexibleDateRange(to);
 						if (!range) {
-							return reply.status(400).send({ message: "Data final inválida" });
+							return reply
+								.status(400)
+								.send({ message: "Data final inválida" });
 						}
 						dateFilter.lte = range.end;
 					}
@@ -88,15 +99,6 @@ export async function getWorkoutsRoute(app: FastifyInstance) {
 					orderBy: { date: "desc" },
 				});
 
-				const formattedWorkouts = workouts.map((workout) => ({
-					id: workout.id,
-					name: workout.name,
-					notes: workout.notes,
-					date: workout.date.toISOString().slice(0, 10),
-					createdAt: workout.createdAt.toISOString(),
-					updatedAt: workout.updatedAt.toISOString(),
-				}));
-
 				return reply.status(200).send({
 					pagination: {
 						page,
@@ -104,7 +106,7 @@ export async function getWorkoutsRoute(app: FastifyInstance) {
 						totalItems,
 						totalPages,
 					},
-					data: formattedWorkouts,
+					data: workouts,
 				});
 			},
 		);

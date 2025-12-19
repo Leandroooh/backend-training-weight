@@ -58,7 +58,7 @@ model ExerciseEntry {
 model ExerciseSeries {
   id String @id @default(uuid())
 
-  series       Int
+  set          Int
   reps         Int
   seriesWeight Float
 
@@ -68,6 +68,6 @@ model ExerciseSeries {
   exerciseEntry   ExerciseEntry @relation(fields: [exerciseEntryId], references: [id], onDelete: Cascade)
   exerciseEntryId String
 
-  @@unique([series, exerciseEntryId])
+  @@unique([set, exerciseEntryId])
   @@map("exercise_series")
 }

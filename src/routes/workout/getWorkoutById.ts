@@ -51,7 +51,7 @@ export async function getWorkoutById(app: FastifyInstance) {
 						.send({ message: "Workout not found" });
 				}
 
-				return reply.status(200).send({ data: workout });
+				return reply.status(200).send(workout);
 			},
 		);
 }

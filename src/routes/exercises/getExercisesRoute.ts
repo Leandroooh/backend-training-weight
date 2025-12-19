@@ -12,7 +12,7 @@ export async function GetExercisesRoute(app: FastifyInstance) {
 			"/workout/:id/exercises",
 			{
 				schema: {
-					tags: ["Exercise"],
+					tags: ["Exercises"],
 					params: z.object({
 						id: z.string(),
 					}),
@@ -32,7 +32,7 @@ export async function GetExercisesRoute(app: FastifyInstance) {
 						updatedAt: true,
 						series: {
 							select: {
-								series: true,
+								set: true,
 								reps: true,
 								seriesWeight: true,
 							},

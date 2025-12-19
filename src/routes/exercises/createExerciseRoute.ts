@@ -9,10 +9,10 @@ export async function createExerciseRoute(app: FastifyInstance) {
 		.withTypeProvider<ZodTypeProvider>()
 		.register(AuthHandler)
 		.post(
-			"/workout/:id/exercise",
+			"/workout/:id/exercises	",
 			{
 				schema: {
-					tags: ["Exercise"],
+					tags: ["Exercises"],
 					body: z.object({
 						exercise: z.string(),
 					}),
@@ -26,7 +26,7 @@ export async function createExerciseRoute(app: FastifyInstance) {
 				const { exercise } = request.body;
 				const userId = await request.getCurrentUserToken();
 
-				const workoutId = await prisma.workout.findFirst({
+				const workout = await prisma.workout.findFirst({
 					where: {
 						id,
 						userId,
@@ -36,16 +36,16 @@ export async function createExerciseRoute(app: FastifyInstance) {
 					},
 				});
 
-				if (!workoutId) {
+				if (!workout) {
 					return reply
 						.status(404)
-						.send({ message: "Workout not found" });
+						.send({ message: "Treino não encontrado" });
 				}
 
 				const exerciseEntry = await prisma.exerciseEntry.create({
 					data: {
 						exercise,
-						workoutId: workoutId.id,
+						workoutId: workout.id,
 					},
 				});
 
