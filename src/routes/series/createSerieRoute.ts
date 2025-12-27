@@ -17,7 +17,7 @@ export async function CreateSeriesRoute(app: FastifyInstance) {
 						exerciseEntryId: z.string(),
 					}),
 					body: z.object({
-						series: z.number(),
+						set: z.number(),
 						reps: z.number(),
 						seriesWeight: z.number(),
 					}),
@@ -25,26 +25,25 @@ export async function CreateSeriesRoute(app: FastifyInstance) {
 			},
 			async (request, reply) => {
 				const { exerciseEntryId } = request.params;
-				const { series, reps, seriesWeight } = request.body;
+				const { set, reps, seriesWeight } = request.body;
 
 				const seriesAlreadyExists =
 					await prisma.exerciseSeries.findFirst({
 						where: {
 							exerciseEntryId,
-							series,
 						},
 					});
 
 				if (seriesAlreadyExists) {
 					return reply
 						.status(400)
-						.send({ message: `Serie ${series} já cadastrada!` });
+						.send({ message: `Serie ${set} já cadastrada!` });
 				}
 
 				const serie = await prisma.exerciseSeries.create({
 					data: {
+						set,
 						reps,
-						series,
 						seriesWeight,
 						exerciseEntryId,
 					},

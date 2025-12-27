@@ -12,6 +12,7 @@ import { LoginUserRoute } from "./routes/auth/loginRoute.js";
 import { Me } from "./routes/auth/me.js";
 import { RegisterUserRoute } from "./routes/auth/registerRoute.js";
 import { createExerciseRoute } from "./routes/exercises/createExerciseRoute.js";
+import { deleteExercise } from "./routes/exercises/deleteExerciseRoute.js";
 import { GetExercisesRoute } from "./routes/exercises/getExercisesRoute.js";
 import { CreateSeriesRoute } from "./routes/series/createSerieRoute.js";
 import { GetSeriesRoute } from "./routes/series/getSeriesRoute.js";
@@ -69,6 +70,7 @@ app.register(GetSeriesRoute);
 app.register(CreateSeriesRoute);
 
 app.register(GetExercisesRoute);
+app.register(deleteExercise);
 
 // app.setErrorHandler((error, request, reply) => {
 // 	// 1️⃣ Log detalhado do erro
