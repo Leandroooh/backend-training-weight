@@ -31,6 +31,7 @@ export async function CreateSeriesRoute(app: FastifyInstance) {
 					await prisma.exerciseSeries.findFirst({
 						where: {
 							exerciseEntryId,
+							set,
 						},
 					});
 
